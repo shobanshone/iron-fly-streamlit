@@ -28,13 +28,7 @@ from datetime import datetime, date, timedelta, timezone
 from math import ceil
 from kiteconnect import KiteConnect
 
-# --------------------------------
-# 🔧 USER SETTINGS
-# --------------------------------
-# api_key = "l3f630rptw455eqt"
-# kite = KiteConnect(api_key = api_key)
-# with open("access_token.txt", "r") as f:
-#     kite.set_access_token(f.read().strip())
+
 
 EXPIRIES = {
     "NIFTY": {
