@@ -4,8 +4,8 @@ from math import ceil
 from kiteconnect import KiteConnect
 
 
-#kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
-#kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
+kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
+kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
 # --------------------------------
 # 🔧 USER SETTINGS
 # --------------------------------
@@ -90,16 +90,16 @@ def execute_iron_fly(
     pe_buy = atm - hedge_distance
 
     def place(tradingsymbol, transaction):
-        print("dddd")
-        # kite.place_order(
-        #     variety=kite.VARIETY_REGULAR,
-        #     exchange=exchange,
-        #     tradingsymbol=tradingsymbol,
-        #     transaction_type=transaction,
-        #     quantity=qty,
-        #     product=kite.PRODUCT_NRML,
-        #     order_type=order_type
-        # )
+        
+        kite.place_order(
+             variety=kite.VARIETY_REGULAR,
+             exchange=exchange,
+             tradingsymbol=tradingsymbol,
+             transaction_type=transaction,
+             quantity=qty,
+             product=kite.PRODUCT_NRML,
+             order_type=order_type
+         )
 
     place(f"{index_name}{expiry}{ce_buy}CE", "BUY")
     place(f"{index_name}{expiry}{pe_buy}PE", "BUY")
