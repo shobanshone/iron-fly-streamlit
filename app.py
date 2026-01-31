@@ -1,5 +1,5 @@
 import streamlit as st
-from strategy import execute_iron_fly, EXPIRIES
+#from strategy import execute_iron_fly, EXPIRIES
 
 # -------------------------------------------------
 # Page config (mobile-friendly)
@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 st.title("📱 Iron Fly Trader")
-
+'''
 # -------------------------------------------------
 # SIDEBAR — All inputs (best for mobile)
 # -------------------------------------------------
@@ -127,3 +127,4 @@ if st.button("🚀 EXECUTE IRON FLY"):
 
 if st.session_state.executed:
     st.info("🔒 Execution locked. Refresh page for next trade.")
+'''
