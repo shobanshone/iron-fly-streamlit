@@ -3,9 +3,7 @@ from datetime import datetime, date, timedelta, timezone
 from math import ceil
 from kiteconnect import KiteConnect
 
-<<<<<<< HEAD
 
-=======
 kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
 kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
 # --------------------------------
@@ -13,7 +11,7 @@ kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
 # --------------------------------
 # with open("access_token.txt", "r") as f:
 #     kite.set_access_token(f.read().strip())
->>>>>>> 5a80e74 (Updated expiry mapping for NIFTY and SENSEX)
+
 
 EXPIRIES = {
     "NIFTY": {
