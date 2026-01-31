@@ -4,8 +4,8 @@ from math import ceil
 from kiteconnect import KiteConnect
 
 
-kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
-kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
+#kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
+#kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
 # --------------------------------
 # 🔧 USER SETTINGS
 # --------------------------------
