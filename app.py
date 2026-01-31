@@ -1,6 +1,14 @@
 import streamlit as st
 from strategy import execute_iron_fly, EXPIRIES
 
+# ---------- SIMPLE AUTH ----------
+APP_PIN = os.environ["APP_PIN"]   # change this
+
+pin = st.text_input("🔐 Enter PIN", type="password")
+
+if pin != APP_PIN:
+    st.warning("Unauthorized access")
+    st.stop()
 # -------------------------------------------------
 # Page config (mobile-friendly)
 # -------------------------------------------------
