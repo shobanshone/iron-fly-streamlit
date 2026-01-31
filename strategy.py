@@ -1,46 +1,65 @@
-
-
-
-"""
-Full-featured Kite Connect Iron Condor runner (simulation + live-ready)
-
-Features:
- - Wait until 09:29:59 IST -> compute ATM (nearest 50) & wings (±300)
- - Find NFO option instruments for nearest expiry
- - Place entry as: BUY wings first, SELL ATM legs
- - Robust order handling: LIMIT (recommended) with dynamic price or MARKET fallback
- - Poll order status until complete; handle partial fills and attempt to fill remainder
- - Monitor spot: immediate square-off if |spot - ATM| >= 150, else square-off at 15:20 IST
- - Logging to CSV (events), email & webhook alerts on entry and exit
- - DRY_RUN mode: simulates orders & fills for full tests (default True)
-"""
 import os
-import json
-import csv
-import time
-import tempfile
-import traceback
-import requests
-import smtplib
-import re
-import statistics
 from datetime import datetime, date, timedelta, timezone
 from math import ceil
 from kiteconnect import KiteConnect
 
+<<<<<<< HEAD
 
+=======
+kite = KiteConnect(api_key=os.environ["KITE_API_KEY"])
+kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
+# --------------------------------
+# 🔧 USER SETTINGS
+# --------------------------------
+# with open("access_token.txt", "r") as f:
+#     kite.set_access_token(f.read().strip())
+>>>>>>> 5a80e74 (Updated expiry mapping for NIFTY and SENSEX)
 
 EXPIRIES = {
     "NIFTY": {
-        "24 JAN 2026": "26JAN",
-        "31 JAN 2026": "31JAN",
-        "07 FEB 2026": "07FEB"
-    },
+    "03 Feb 2026": "03FEB",
+    "10 Feb 2026": "10FEB",
+    "17 Feb 2026": "17FEB",
+    "24 Feb 2026": "24FEB",
+    "02 Mar 2026": "02MAR",
+    "30 Mar 2026": "30MAR",
+    "28 Apr 2026": "28APR",
+    "30 Jun 2026": "30JUN",
+    "29 Sep 2026": "29SEP",
+    "29 Dec 2026": "29DEC",
+    "29 Jun 2027": "29JUN",
+    "28 Dec 2027": "28DEC",
+    "27 Jun 2028": "27JUN",
+    "26 Dec 2028": "26DEC",
+    "26 Jun 2029": "26JUN",
+    "24 Dec 2029": "24DEC",
+    "25 Jun 2030": "25JUN",
+    "31 Dec 2030": "31DEC"
+},
     "SENSEX": {
-        "24 JAN 2026": "26JAN",
-        "31 JAN 2026": "31JAN"
-    }
+    "05 Feb 2026": "05FEB",
+    "12 Feb 2026": "12FEB",
+    "19 Feb 2026": "19FEB",
+    "26 Feb 2026": "26FEB",
+    "05 Mar 2026": "05MAR",
+    "12 Mar 2026": "12MAR",
+    "19 Mar 2026": "19MAR",
+    "25 Mar 2026": "25MAR",
+    "30 Apr 2026": "30APR",
+    "25 Jun 2026": "25JUN",
+    "24 Sep 2026": "24SEP",
+    "31 Dec 2026": "31DEC",
+    "24 Jun 2027": "24JUN",
+    "30 Dec 2027": "30DEC",
+    "29 Jun 2028": "29JUN",
+    "28 Dec 2028": "28DEC",
+    "28 Jun 2029": "28JUN",
+    "27 Dec 2029": "27DEC",
+    "27 Jun 2030": "27JUN",
+    "26 Dec 2030": "26DEC"
 }
+}
+
 
 INDEX_CONFIG = {
     "NIFTY": {
