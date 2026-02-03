@@ -1,12 +1,12 @@
 import streamlit as st
 import os
-from strategy import execute_iron_fly, EXPIRIES
+from strategy import execute_iron_fly, EXPIRIES, get_kite_user_name
 
 # ---------- SIMPLE AUTH ----------
 APP_PIN = os.environ["APP_PIN"]   # change this
 
 pin = st.text_input("🔐 Enter PIN", type="password")
-
+user_name = get_kite_user_name()
 if pin != APP_PIN:
     st.warning("Unauthorized access")
     st.stop()
@@ -19,6 +19,13 @@ st.set_page_config(
 )
 
 st.title("📱 Iron Fly Trader")
+
+
+if user_name:
+    st.success(f"👤 Connected Kite Account: **{user_name}**")
+else:
+    st.error("❌ Kite account not connected (invalid/expired token)")
+    st.stop()
 
 # -------------------------------------------------
 # SIDEBAR — All inputs (best for mobile)
@@ -99,7 +106,7 @@ with col1:
 with col2:
     st.markdown("**Iron Fly Legs**")
     st.write(f"""
-    🟢 **BUY PE**  → {pe_buy}
+    🟢 **BUY PE**  → {pe_buy}       
     🔴 **SELL PE** → {pe_sell}  
 
     🔴 **SELL CE** → {ce_sell}  
@@ -108,6 +115,7 @@ with col2:
     """)
 
 st.markdown("---")
+dry_run = st.toggle("🧪 Dry Run (No real orders)", value=False)
 
 # -------------------------------------------------
 # CONFIRMATION + EXECUTION (SAFE)
@@ -123,15 +131,23 @@ if st.button("🚀 EXECUTE IRON FLY"):
     elif st.session_state.executed:
         st.warning("⚠️ Trade already executed. Refresh the page to trade again.")
     else:
-        execute_iron_fly(
+        orders = execute_iron_fly(
             index_name=index_name,
             atm=atm,
             hedge_distance=hedge_distance,
             expiry_key=expiry_key,
             lots=lots,
-            order_type=order_type
+            order_type=order_type,
+            dry_run=dry_run
         )
         st.session_state.executed = True
+        if dry_run:
+            st.info("🧪 DRY RUN — No real orders placed")
+            st.json(orders)
+        else:
+            st.success("✅ Orders sent to Kite")
+            st.write("Order IDs:")
+            st.write(orders)
         st.success("✅ Iron Fly executed successfully")
 
 if st.session_state.executed:
