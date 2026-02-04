@@ -6,7 +6,7 @@ from strategy import execute_iron_fly, EXPIRIES, get_kite_user_name
 APP_PIN = os.environ["APP_PIN"]   # change this
 
 pin = st.text_input("🔐 Enter PIN", type="password")
-
+user_name="shoban"
 #user_name = get_kite_user_name()
 if pin != APP_PIN:
     st.warning("Unauthorized access")
