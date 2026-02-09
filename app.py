@@ -39,11 +39,11 @@ with st.sidebar:
     # Dynamic defaults based on index
     if index_name == "NIFTY":
         atm_default = 25000
-        hedge_min = 50
+        hedge_min = 300
         hedge_step = 50
     else:
         atm_default = 82000
-        hedge_min = 200
+        hedge_min = 900
         hedge_step = 100
 
     expiry_key = st.selectbox(
