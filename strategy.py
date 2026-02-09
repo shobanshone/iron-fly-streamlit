@@ -43,7 +43,6 @@ EXPIRIES = {
 },
     "SENSEX": {
    
-    "05 Feb 2026": "26205",
     "12 Feb 2026": "26212",
     "19 Feb 2026": "26219",
     "26 Feb 2026": "26FEB",
@@ -62,9 +61,6 @@ EXPIRIES = {
 
     "29 Jun 2028": "28JUN",
     "28 Dec 2028": "28DEC",
-
-
-    # Month-end expiries → YYMMM
     "31 Dec 2026": "26DEC"
 }
 
