@@ -16,12 +16,11 @@ kite.set_access_token(os.environ["KITE_ACCESS_TOKEN"])
 EXPIRIES = {
     "NIFTY": {
     # Weekly expiries (YYMDD)
-    "10 Feb 2026": "26210",
     "17 Feb 2026": "26217",
     "24 Feb 2026": "26FEB",
     "02 Mar 2026": "26302",
 
-    # Month-end expiries (YYMMM)
+
     "30 Mar 2026": "26MAR",
     "28 Apr 2026": "26APR",
     "30 Jun 2026": "26JUN",
@@ -43,7 +42,6 @@ EXPIRIES = {
 },
     "SENSEX": {
    
-    "12 Feb 2026": "26212",
     "19 Feb 2026": "26219",
     "26 Feb 2026": "26FEB",
 
